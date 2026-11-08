@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bio et pesticides</title>
-<meta name="description" content="Ce que change une alimentation bio sur l'exposition aux pesticides, ce que garantissent les labels, et où en est le bio dans les cantines (loi EGalim). Sources citées.">
+<meta name="description" content="Ce que disent les données sur le bio et les pesticides : santé, environnement, exposition et résidus, cantines (loi EGalim), labels. Sources citées.">
 <style>
   :root {
     --bg: #f7f7f5;
@@ -39,12 +39,26 @@
   .back:hover { color: var(--accent); }
   h1 { font-size: 30px; margin: 0 0 12px; line-height: 1.2; }
   .lead { color: var(--muted); font-size: 16px; margin: 0 0 20px; }
-  nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 40px; }
-  nav.toc a {
-    font-size: 13px; font-weight: 600; padding: 7px 12px; border-radius: 8px;
-    border: 1px solid var(--border); color: var(--text); text-decoration: none; background: var(--card-bg);
+
+  /* Onglets, sur le modèle de l'étude cancers. */
+  nav.tabs {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--bg); border-bottom: 2px solid var(--border);
+    margin: 0 -20px 32px; padding: 0 20px;
   }
-  nav.toc a:hover { border-color: var(--accent); color: var(--accent); }
+  .tabs-inner { display: flex; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+  .tabs [role="tab"] {
+    appearance: none; border: none; background: transparent; font: inherit;
+    font-size: 14.5px; color: var(--muted); padding: 14px 14px 12px; white-space: nowrap; cursor: pointer;
+    border-bottom: 3px solid transparent; margin-bottom: -2px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .tabs [role="tab"]:hover { color: var(--text); }
+  .tabs [role="tab"][aria-selected="true"] { color: var(--accent); font-weight: 600; border-bottom-color: var(--accent); }
+  .tabs [role="tab"]:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .tab-panel:focus { outline: none; }
+  [id] { scroll-margin-top: 64px; }
+
   section { margin-bottom: 48px; }
   h2 { font-size: 22px; margin: 0 0 14px; line-height: 1.3; }
   h3 { font-size: 16px; margin: 22px 0 6px; }
@@ -80,6 +94,7 @@
     main { padding-top: 40px; }
     h1 { font-size: 25px; }
     th, td { padding: 6px 4px; }
+    .tabs [role="tab"] { padding: 12px 11px 10px; font-size: 14px; }
   }
 </style>
 </head>
@@ -87,403 +102,564 @@
 <main>
   <a class="back" href="https://biguhuh.github.io/">← Tous les projets</a>
   <h1>Bio et pesticides</h1>
-  <p class="lead">Ce que recommandent les autorités de santé, ce que change une alimentation bio sur
-    l'exposition aux pesticides, ce que garantissent les labels, où en est le bio dans les cantines, et
-    les réponses aux objections courantes. Chaque affirmation renvoie à sa source.</p>
+  <p class="lead">Ce que disent les données sur le bio et les pesticides&nbsp;: les recommandations de santé,
+    l'environnement, l'exposition et les résidus, les cantines et les labels. Chaque affirmation renvoie à
+    sa source.</p>
 
-  <nav class="toc" aria-label="Sommaire">
-    <a href="#recommandations">Les autorités de santé</a>
-    <a href="#exposition">Bio et exposition</a>
-    <a href="#residus">Les résidus dans l'assiette</a>
-    <a href="#labels">Les labels</a>
-    <a href="#cantines">Le bio à la cantine</a>
-    <a href="#objections">Les objections courantes</a>
-    <a href="#sources">Sources</a>
+  <nav class="tabs" aria-label="Sections de la page">
+    <div class="tabs-inner" role="tablist">
+      <button role="tab" id="tab-sante" data-tab="sante" aria-controls="panel-sante" aria-selected="true">Santé</button>
+      <button role="tab" id="tab-environnement" data-tab="environnement" aria-controls="panel-environnement" aria-selected="false">Environnement</button>
+      <button role="tab" id="tab-exposition" data-tab="exposition" aria-controls="panel-exposition" aria-selected="false">Exposition et résidus</button>
+      <button role="tab" id="tab-cantines" data-tab="cantines" aria-controls="panel-cantines" aria-selected="false">Cantines</button>
+      <button role="tab" id="tab-labels" data-tab="labels" aria-controls="panel-labels" aria-selected="false">Labels</button>
+      <button role="tab" id="tab-sources" data-tab="sources" aria-controls="panel-sources" aria-selected="false">Sources</button>
+    </div>
   </nav>
 
-  <section id="recommandations" aria-labelledby="h-recommandations">
-    <h2 id="h-recommandations">Ce que recommandent les autorités de santé</h2>
+  <!-- ===================== Santé ===================== -->
+  <div class="tab-panel" id="panel-sante" data-tab="sante" role="tabpanel" aria-labelledby="tab-sante">
+    <section id="recommandations" aria-labelledby="h-recommandations">
+      <h2 id="h-recommandations">Ce que recommandent les autorités de santé</h2>
 
-    <p>En 2017, le Haut Conseil de la santé publique a révisé les repères alimentaires des adultes.
-      Il recommande de privilégier les fruits et légumes, les légumineuses et les produits céréaliers
-      complets cultivés selon des modes de production qui diminuent l'exposition aux pesticides
-      <sup class="cite"><a href="#src-16">16</a></sup>.</p>
-    <p>Santé publique France a repris cet avis dans ses repères pour le grand public. Parmi les
-      aliments vers lesquels aller, elle cite les aliments bio <sup class="cite"><a href="#src-17">17</a></sup>.
-      Le cinquième programme national nutrition santé, lancé en avril 2026, vise 12&nbsp;% de produits
-      bio dans la consommation d'ici 2030. De nouvelles recommandations doivent en découler
-      <sup class="cite"><a href="#src-18">18</a></sup>.</p>
+      <p>En 2017, le Haut Conseil de la santé publique a révisé les repères alimentaires des adultes.
+        Il recommande de privilégier les fruits et légumes, les légumineuses et les produits céréaliers
+        complets cultivés selon des modes de production qui diminuent l'exposition aux pesticides
+        <sup class="cite"><a href="#src-16">16</a></sup>.</p>
+      <p>Santé publique France a repris cet avis dans ses repères pour le grand public. Parmi les
+        aliments vers lesquels aller, elle cite les aliments bio <sup class="cite"><a href="#src-17">17</a></sup>.
+        Le cinquième programme national nutrition santé, lancé en avril 2026, vise 12&nbsp;% de produits
+        bio dans la consommation d'ici 2030. De nouvelles recommandations doivent en découler
+        <sup class="cite"><a href="#src-18">18</a></sup>.</p>
 
-    <div class="note">
-      <p><strong>Sur quoi reposent ces recommandations.</strong> Le motif avancé est la réduction de
-        l'exposition aux pesticides. Un bénéfice sur la santé des consommateurs n'est pas démontré&nbsp;:
-        voir <a href="#objection-sante">les objections sur la santé</a>.</p>
-    </div>
-  </section>
+      <div class="note">
+        <p><strong>Sur quoi reposent ces recommandations.</strong> Le motif avancé est la réduction de
+          l'exposition aux pesticides. Un bénéfice sur la santé des consommateurs n'est pas démontré&nbsp;:
+          voir ci-dessous.</p>
+      </div>
+    </section>
 
-  <section id="exposition" aria-labelledby="h-exposition">
-    <h2 id="h-exposition">Manger bio change-t-il l'exposition aux pesticides&nbsp;?</h2>
+    <section id="sante-consommateurs" aria-labelledby="h-sante-consommateurs">
+      <h2 id="h-sante-consommateurs">Et la santé des consommateurs&nbsp;?</h2>
 
-    <p>Pour la population générale, l'alimentation est la principale voie d'exposition aux
-      pesticides. Les études qui le montrent sont présentées dans l'étude
-      <a href="https://biguhuh.github.io/cancer/#alimentation">Cancers, pesticides et voies d'exposition</a>.
-      Cette page porte sur une autre question&nbsp;: que se passe-t-il quand on mange bio&nbsp;?</p>
+      <p>Il faut distinguer deux choses. Manger bio réduit l'exposition aux pesticides&nbsp;: c'est mesuré
+        dans les urines (<a href="#h-exposition">exposition et résidus</a>).
+        Un effet sur la santé des consommateurs, lui, n'est pas démontré.</p>
+      <p>Deux grandes cohortes donnent des résultats différents.
+        En France, l'étude NutriNet-Santé a suivi 68&nbsp;946 adultes. Le quart qui mangeait le plus bio
+        avait 25&nbsp;% de cancers en moins que le quart qui en mangeait le moins
+        <sup class="cite"><a href="#src-23">23</a></sup>.
+        Au Royaume-Uni, l'étude Million Women a suivi 623&nbsp;080 femmes. Elle ne trouve pas moins de cancers
+        au total chez celles qui mangent bio. Seul le lymphome non hodgkinien est moins fréquent
+        <sup class="cite"><a href="#src-24">24</a></sup>.
+        Une revue systématique de 2019 conclut que les données ne permettent pas d'affirmer un bénéfice
+        sur la santé <sup class="cite"><a href="#src-25">25</a></sup>.</p>
+      <p>Le lien entre pesticides et maladies est mieux établi chez les personnes les plus exposées,
+        comme les agriculteurs <sup class="cite"><a href="#src-22">22</a></sup>. Il est présenté dans
+        l'<a href="https://biguhuh.github.io/cancer/">étude cancers</a>.</p>
 
-    <h3>Une étude d'intervention, en Californie</h3>
-    <p>En 2006, 40 enfants de 3 à 6 ans ont été suivis pendant 16 jours <sup class="cite"><a href="#src-1">1</a></sup>.
-      Ils ont mangé conventionnel pendant 4 jours, uniquement bio pendant 7 jours, puis à nouveau
-      conventionnel pendant 5 jours.
-      Pendant la semaine bio, les métabolites urinaires de certains insecticides, les organophosphorés,
-      ont baissé de 40 à 49&nbsp;%.
-      Ceux d'un herbicide, le 2,4-D, ont baissé de 25&nbsp;%.
-      D'autres métabolites mesurés n'ont pas baissé de façon nette.</p>
+      <div class="note">
+        <p><strong>Limites.</strong> Ce sont des études d'observation. Ceux qui mangent bio ont souvent
+          une alimentation et un mode de vie différents. Les auteurs corrigent une partie de ces écarts,
+          pas tous. Aucun essai n'a tiré au sort des personnes pour manger bio pendant des années.</p>
+      </div>
+    </section>
+  </div>
 
-    <h3>Une cohorte, en Bretagne</h3>
-    <p>La cohorte PELAGIE a mesuré des insecticides de la famille des pyréthrinoïdes dans les urines de
-      245 enfants de 6 ans, entre 2009 et 2012 <sup class="cite"><a href="#src-2">2</a></sup>.
-      Plus la part d'aliments bio était grande, plus les taux de deux métabolites étaient bas
-      <sup class="cite"><a href="#src-11">11</a></sup>.
-      Un résultat va en sens inverse&nbsp;: les enfants qui mangeaient plus de fruits, légumes et
-      céréales bio avaient davantage de traces d'un troisième métabolite.
-      L'auteur principal appelle à la prudence sur ce point.</p>
+  <!-- ===================== Environnement ===================== -->
+  <div class="tab-panel" id="panel-environnement" data-tab="environnement" role="tabpanel" aria-labelledby="tab-environnement">
+    <section aria-labelledby="h-environnement">
+      <h2 id="h-environnement">Pesticides et environnement</h2>
 
-    <div class="note">
-      <p><strong>Ce que ces études mesurent.</strong> Des résidus de pesticides dans les urines, donc
-        une exposition. Elles ne mesurent pas les effets sur la santé.</p>
-      <p><strong>Leurs limites.</strong> L'étude californienne porte sur 40 enfants et une semaine de
-        régime bio. Elle compare chaque enfant à lui-même, sans groupe témoin tiré au sort.
-        PELAGIE est une étude d'observation, sur un seul échantillon d'urine par enfant&nbsp;: elle montre
-        des associations, pas une causalité.</p>
-    </div>
-  </section>
+      <p>Les pesticides ne restent pas dans l'assiette. Ils touchent la faune, les sols et l'eau.
+        Voici ce que mesurent les études, et ce que change le bio.</p>
 
-  <section id="residus" aria-labelledby="h-residus">
-    <h2 id="h-residus">Les résidus dans l'assiette</h2>
+      <h3 id="oiseaux">Les oiseaux des champs</h3>
+      <p>Une étude européenne a suivi 170 espèces d'oiseaux communs sur plus de 20&nbsp;000 sites, dans
+        28 pays, de 1980 à 2016 <sup class="cite"><a href="#src-31">31</a></sup>.
+        Le nombre d'oiseaux a baissé d'un quart. Pour les oiseaux des milieux agricoles, la baisse
+        atteint 57&nbsp;%.
+        Parmi les pressions étudiées, l'intensification agricole, en particulier l'usage de pesticides et
+        d'engrais, est la principale cause du déclin.</p>
 
-    <p>Chaque année, les pays européens analysent des aliments vendus sur leur marché et l'Autorité
-      européenne de sécurité des aliments (EFSA) publie les résultats. Pour l'année 2023, 7&nbsp;074
-      échantillons bio ont été analysés <sup class="cite"><a href="#src-19">19</a></sup>.</p>
+      <h3 id="biodiversite">Plus d'espèces dans les champs bio</h3>
+      <p>Une méta-analyse de 94 études trouve en moyenne 30&nbsp;% d'espèces en plus sur les parcelles bio.
+        Le résultat est stable sur trente ans de publications. L'effet est plus fort dans les paysages de
+        grandes cultures <sup class="cite"><a href="#src-26">26</a></sup>.</p>
 
-    <div class="figures">
-      <div class="figure"><strong>80&nbsp;%</strong><span>des échantillons bio sans résidu quantifiable</span></div>
-      <div class="figure"><strong>0,9&nbsp;%</strong><span>des échantillons bio au-dessus de la limite légale</span></div>
-      <div class="figure"><strong>58&nbsp;%</strong><span>de l'ensemble des échantillons sans résidu quantifiable</span></div>
-      <div class="figure"><strong>3,7&nbsp;%</strong><span>de l'ensemble des échantillons au-dessus de la limite légale</span></div>
-    </div>
+      <h3 id="chize">Dans la plaine au sud de Niort</h3>
+      <p>Le Centre d'études biologiques de Chizé (CNRS) suit une zone atelier dans la plaine au sud de
+        Niort. Sur 294 champs de colza suivis de 2013 à 2016, les pesticides n'ont pas augmenté les
+        rendements, et leur coût a réduit la marge des agriculteurs
+        <sup class="cite"><a href="#src-32">32</a></sup>.
+        Les champs où les abeilles sont plus nombreuses ont un rendement et une marge de 15 à 40&nbsp;%
+        plus élevés. L'usage de pesticides réduit fortement cet effet.</p>
 
-    <p>L'ensemble compte 132&nbsp;793 échantillons, bio compris. L'EFSA conclut que les résidus sont
-      moins souvent quantifiés et les limites moins souvent dépassées dans les aliments bio
-      <sup class="cite"><a href="#src-19">19</a></sup>.
-      Quand on trouve des résidus en bio, l'EFSA donne trois explications&nbsp;: des substances
-      autorisées en bio, une contamination de l'environnement, ou un produit conventionnel étiqueté bio
-      à tort.</p>
+      <h3 id="eau">L'eau</h3>
+      <p>Les mesures de pesticides dans l'eau du robinet et dans l'air sont présentées dans l'étude
+        <a href="https://biguhuh.github.io/cancer/#exposition">Cancers, pesticides et voies d'exposition</a>.</p>
+      <p>Prévenir la pollution coûte moins cher que la traiter. Une étude de l'Agence de l'eau
+        Seine-Normandie a comparé les deux sur 21 captages. Dépolluer une eau chargée en nitrates et
+        pesticides coûte en moyenne trois fois plus cher que prévenir la pollution
+        <sup class="cite"><a href="#src-33">33</a></sup>.
+        En France, retirer les pesticides et les nitrates de l'eau potable coûterait entre 750 millions et
+        1,3 milliard d'euros par an. Cette estimation date du début des années 2010 et n'a pas été
+        réactualisée, alors que le nombre de substances recherchées a augmenté
+        <sup class="cite"><a href="#src-27">27</a></sup>.
+        Ce coût est payé par la facture d'eau.</p>
 
-    <div class="note">
-      <p><strong>Ce que ces chiffres disent.</strong> Le bio n'est pas «&nbsp;zéro résidu&nbsp;», mais il
-        en contient beaucoup moins souvent.</p>
-      <p><strong>Leurs limites.</strong> Ces contrôles ciblent en partie les produits à risque. Ils ne
-        décrivent pas exactement ce que mange un consommateur moyen. Le rapport ne donne pas de chiffre
-        pour le conventionnel seul, seulement pour l'ensemble des échantillons.</p>
-    </div>
-  </section>
+      <h3 id="ventes">Les ventes de pesticides en France</h3>
+      <p>En 2023, environ 292&nbsp;000 tonnes de pesticides ont été vendues dans l'Union européenne.
+        La France en représente 23&nbsp;%, devant l'Espagne (18&nbsp;%), l'Allemagne et l'Italie
+        (14&nbsp;% chacune) <sup class="cite"><a href="#src-34">34</a></sup>.
+        Ce chiffre est en tonnes vendues, sans tenir compte de la surface cultivée.</p>
 
-  <section id="labels" aria-labelledby="h-labels">
-    <h2 id="h-labels">Labels alimentaires&nbsp;: ce qu'ils garantissent sur les pesticides</h2>
+      <div class="note">
+        <p><strong>Limites.</strong> Les 30&nbsp;% d'espèces en plus sont une moyenne&nbsp;: l'effet varie
+          selon les cultures et les paysages. L'étude sur les oiseaux est une étude d'observation à grande
+          échelle&nbsp;; elle compare des pressions, sans isoler l'effet de chaque substance. L'étude de
+          Chizé porte sur une culture et un territoire.</p>
+      </div>
+    </section>
+  </div>
 
-    <p>Plusieurs labels parlent d'environnement ou de qualité. Ils ne disent pas tous la même chose sur
-      les pesticides.</p>
+  <!-- ===================== Exposition et résidus ===================== -->
+  <div class="tab-panel" id="panel-exposition" data-tab="exposition" role="tabpanel" aria-labelledby="tab-exposition">
+    <section aria-labelledby="h-exposition">
+      <h2 id="h-exposition">Manger bio change-t-il l'exposition aux pesticides&nbsp;?</h2>
 
-    <table>
-      <thead>
-        <tr><th scope="col">Label</th><th scope="col">Pesticides de synthèse</th><th scope="col">Ce qui est contrôlé</th></tr>
-      </thead>
-      <tbody>
-        <tr><th scope="row">Bio (AB, Eurofeuille)</th><td>Interdits</td><td>La méthode de production, sur l'exploitation</td></tr>
-        <tr><th scope="row">HVE</th><td>Autorisés</td><td>Un score sur quatre thèmes</td></tr>
-        <tr><th scope="row">Zéro résidu de pesticides</th><td>Autorisés</td><td>Les résidus sur le produit récolté</td></tr>
-      </tbody>
-    </table>
+      <p>Pour la population générale, l'alimentation est la principale voie d'exposition aux
+        pesticides. Les études qui le montrent sont présentées dans l'étude
+        <a href="https://biguhuh.github.io/cancer/#alimentation">Cancers, pesticides et voies d'exposition</a>.
+        Cette page porte sur une autre question&nbsp;: que se passe-t-il quand on mange bio&nbsp;?</p>
 
-    <h3>Bio, AB ou Eurofeuille</h3>
-    <p>Le règlement européen interdit les pesticides et engrais de synthèse, ainsi que les OGM
-      <sup class="cite"><a href="#src-6">6</a></sup>.
-      Des organismes certificateurs indépendants contrôlent l'exploitation elle-même.
-      Le bio autorise une liste limitée de substances, fixée par un règlement européen et révisée
-      régulièrement <sup class="cite"><a href="#src-12">12</a></sup>.
-      Il s'agit de substances d'origine naturelle ou de biocontrôle, comme le cuivre ou le soufre
-      <sup class="cite"><a href="#src-7">7</a></sup>.
-      La plupart se dégradent plus vite que les pesticides de synthèse. Le cuivre et le soufre font
-      exception.
-      Le bio garantit donc l'absence de pesticides de synthèse, pas l'absence de tout traitement.</p>
+      <h3>Une étude d'intervention, en Californie</h3>
+      <p>En 2006, 40 enfants de 3 à 6 ans ont été suivis pendant 16 jours <sup class="cite"><a href="#src-1">1</a></sup>.
+        Ils ont mangé conventionnel pendant 4 jours, uniquement bio pendant 7 jours, puis à nouveau
+        conventionnel pendant 5 jours.
+        Pendant la semaine bio, les métabolites urinaires de certains insecticides, les organophosphorés,
+        ont baissé de 40 à 49&nbsp;%.
+        Ceux d'un herbicide, le 2,4-D, ont baissé de 25&nbsp;%.
+        D'autres métabolites mesurés n'ont pas baissé de façon nette.</p>
 
-    <h3>HVE, Haute Valeur Environnementale</h3>
-    <p>Ce label d'État n'interdit pas les pesticides de synthèse <sup class="cite"><a href="#src-8">8</a></sup>.
-      Il note l'exploitation sur quatre thèmes&nbsp;: biodiversité, stratégie phytosanitaire, fertilisation
-      et irrigation.
-      Depuis 2023, sa nouvelle version interdit les pesticides dont la toxicité pour la reproduction,
-      le caractère cancérogène ou mutagène est avéré ou présumé <sup class="cite"><a href="#src-13">13</a></sup>.
-      Les autres pesticides de synthèse restent autorisés.
-      Des associations, dont la fédération des agriculteurs bio, ont attaqué ce label pour tromperie
-      du consommateur.
-      Le Conseil d'État a rejeté leur recours en février 2025 <sup class="cite"><a href="#src-13">13</a></sup>.</p>
+      <h3>Une cohorte, en Bretagne</h3>
+      <p>La cohorte PELAGIE a mesuré des insecticides de la famille des pyréthrinoïdes dans les urines de
+        245 enfants de 6 ans, entre 2009 et 2012 <sup class="cite"><a href="#src-2">2</a></sup>.
+        Plus la part d'aliments bio était grande, plus les taux de deux métabolites étaient bas
+        <sup class="cite"><a href="#src-11">11</a></sup>.
+        Un résultat va en sens inverse&nbsp;: les enfants qui mangeaient plus de fruits, légumes et
+        céréales bio avaient davantage de traces d'un troisième métabolite.
+        L'auteur principal appelle à la prudence sur ce point.</p>
 
-    <h3>Zéro résidu de pesticides</h3>
-    <p>C'est un label privé, créé en 2018 <sup class="cite"><a href="#src-9">9</a></sup>.
-      Les pesticides de synthèse restent autorisés pendant la culture.
-      Le label vise l'absence de résidu quantifiable sur le produit, au seuil de 0,01&nbsp;mg/kg.
-      Ce seuil est une limite de mesure&nbsp;: un résidu plus faible peut rester.
-      Les sols, l'eau et l'air restent exposés pendant la production.</p>
+      <div class="note">
+        <p><strong>Ce que ces études mesurent.</strong> Des résidus de pesticides dans les urines, donc
+          une exposition. Elles ne mesurent pas les effets sur la santé.</p>
+        <p><strong>Leurs limites.</strong> L'étude californienne porte sur 40 enfants et une semaine de
+          régime bio. Elle compare chaque enfant à lui-même, sans groupe témoin tiré au sort.
+          PELAGIE est une étude d'observation, sur un seul échantillon d'urine par enfant&nbsp;: elle montre
+          des associations, pas une causalité.</p>
+      </div>
+    </section>
 
-    <div class="note">
-      <p><strong>En résumé.</strong> Des trois, seul le bio interdit les pesticides de synthèse par
-        construction. HVE en interdit une partie, Zéro résidu mesure un résultat sur le produit.</p>
-      <p><strong>Nature des sources.</strong> Les fiches sur HVE et Zéro résidu viennent d'une association
-        de consommateurs et d'une association environnementale, qui ont porté le recours contre HVE.
-        Elles décrivent les cahiers des charges avec un regard critique. La décision du Conseil d'État
-        donne la position du juge.</p>
-    </div>
-  </section>
+    <section id="residus" aria-labelledby="h-residus">
+      <h2 id="h-residus">Les résidus dans l'assiette</h2>
 
-  <section id="cantines" aria-labelledby="h-cantines">
-    <h2 id="h-cantines">Le bio à la cantine&nbsp;: la loi EGalim</h2>
+      <p>Chaque année, les pays européens analysent des aliments vendus sur leur marché et l'Autorité
+        européenne de sécurité des aliments (EFSA) publie les résultats. Pour l'année 2023, 7&nbsp;074
+        échantillons bio ont été analysés <sup class="cite"><a href="#src-19">19</a></sup>.</p>
 
-    <p>La loi EGalim fixe des objectifs d'achat à la restauration collective <sup class="cite"><a href="#src-3">3</a></sup>.
-      Au moins 50&nbsp;% de produits durables et de qualité, dont 20&nbsp;% de produits bio.
-      L'objectif s'applique à la restauration collective publique depuis 2022.
-      La loi Climat et résilience l'a étendu à la restauration d'entreprise du secteur privé en 2024
-      <sup class="cite"><a href="#src-4">4</a>, <a href="#src-10">10</a></sup>.</p>
+      <div class="figures">
+        <div class="figure"><strong>80&nbsp;%</strong><span>des échantillons bio sans résidu quantifiable</span></div>
+        <div class="figure"><strong>0,9&nbsp;%</strong><span>des échantillons bio au-dessus de la limite légale</span></div>
+        <div class="figure"><strong>58&nbsp;%</strong><span>de l'ensemble des échantillons sans résidu quantifiable</span></div>
+        <div class="figure"><strong>3,7&nbsp;%</strong><span>de l'ensemble des échantillons au-dessus de la limite légale</span></div>
+      </div>
 
-    <h3>Où en est-on en France&nbsp;?</h3>
-    <p>Trois sources mesurent des choses différentes. Chaque chiffre porte sur une base précise.</p>
+      <p>L'ensemble compte 132&nbsp;793 échantillons, bio compris. L'EFSA conclut que les résidus sont
+        moins souvent quantifiés et les limites moins souvent dépassées dans les aliments bio
+        <sup class="cite"><a href="#src-19">19</a></sup>.
+        Quand on trouve des résidus en bio, l'EFSA donne trois explications&nbsp;: des substances
+        autorisées en bio, une contamination de l'environnement, ou un produit conventionnel étiqueté bio
+        à tort.</p>
+      <p>Les champs bio reçoivent en effet une partie des pesticides de leurs voisins, par l'air et par
+        l'eau. Les mesures dans l'air et dans l'eau sont présentées dans l'étude
+        <a href="https://biguhuh.github.io/cancer/#exposition">Cancers, pesticides et voies d'exposition</a>.
+        Malgré cette contamination, les aliments bio contiennent beaucoup moins souvent des résidus.</p>
 
-    <table>
-      <thead>
-        <tr><th scope="col">Source</th><th scope="col">Base du chiffre</th><th scope="col">Part de bio</th></tr>
-      </thead>
-      <tbody>
-        <tr><th scope="row">Ministère de l'Agriculture <sup class="cite"><a href="#src-5">5</a></sup></th>
-          <td>Achats 2024 des restaurants qui les ont déclarés, soit 40&nbsp;% des sites</td><td>11,8&nbsp;%</td></tr>
-        <tr><th scope="row">Agence Bio <sup class="cite"><a href="#src-10">10</a></sup></th>
-          <td>Estimation de l'ensemble des achats 2024 des cantines, à partir des ventes des grossistes</td><td>moins de 6&nbsp;%</td></tr>
-        <tr><th scope="row">Association des maires de France <sup class="cite"><a href="#src-14">14</a></sup></th>
-          <td>2&nbsp;282 communes volontaires, cantines des écoles, année 2023, enquête publiée en juin 2024</td><td>37&nbsp;% des communes atteignent 20&nbsp;% <sup class="cite"><a href="#src-10">10</a></sup></td></tr>
-      </tbody>
-    </table>
+      <div class="note">
+        <p><strong>Ce que ces chiffres disent.</strong> Le bio n'est pas «&nbsp;zéro résidu&nbsp;», mais il
+          en contient beaucoup moins souvent.</p>
+        <p><strong>Leurs limites.</strong> Ces contrôles ciblent en partie les produits à risque. Ils ne
+          décrivent pas exactement ce que mange un consommateur moyen. Le rapport ne donne pas de chiffre
+          pour le conventionnel seul, seulement pour l'ensemble des échantillons.</p>
+      </div>
+    </section>
+  </div>
 
-    <p>Pour les produits durables et de qualité, bio compris, le ministère trouve 29,5&nbsp;%, pour un
-      objectif de 50&nbsp;% <sup class="cite"><a href="#src-5">5</a></sup>.
-      Selon l'enquête des maires, 18&nbsp;% des communes atteignaient les deux objectifs à la fois
-      <sup class="cite"><a href="#src-14">14</a></sup>.
-      L'Agence Bio évalue les achats bio des cantines à 516 millions d'euros en 2024, contre 1,5 milliard
-      si l'objectif de 20&nbsp;% était atteint <sup class="cite"><a href="#src-10">10</a></sup>.</p>
+  <!-- ===================== Cantines ===================== -->
+  <div class="tab-panel" id="panel-cantines" data-tab="cantines" role="tabpanel" aria-labelledby="tab-cantines">
+    <section aria-labelledby="h-cantines">
+      <h2 id="h-cantines">Le bio à la cantine&nbsp;: la loi EGalim</h2>
 
-    <div class="note">
-      <p><strong>Pourquoi des chiffres si différents&nbsp;?</strong> Le ministère et l'enquête des maires
-        ne comptent que les cantines ou communes qui répondent. Elles sont souvent les plus avancées.
-        L'Agence Bio estime l'ensemble du marché à partir des grossistes. Toutes ces sources concluent
-        que l'objectif de 20&nbsp;% n'est pas atteint en moyenne.</p>
-    </div>
+      <p>La loi EGalim fixe des objectifs d'achat à la restauration collective <sup class="cite"><a href="#src-3">3</a></sup>.
+        Au moins 50&nbsp;% de produits durables et de qualité, dont 20&nbsp;% de produits bio.
+        L'objectif s'applique à la restauration collective publique depuis 2022.
+        La loi Climat et résilience l'a étendu à la restauration d'entreprise du secteur privé en 2024
+        <sup class="cite"><a href="#src-4">4</a>, <a href="#src-10">10</a></sup>.</p>
 
-    <h3>En Deux-Sèvres et en Charente-Maritime</h3>
-    <p>Les déclarations officielles des cantines sont publiées sur data.gouv.fr
-      <sup class="cite"><a href="#src-15">15</a></sup>.
-      Pour les achats de 2024, un tiers des cantines des deux départements les ont déclarés.
-      Dans les écoles et crèches déclarantes des Deux-Sèvres, le bio atteint en moyenne 24,6&nbsp;%.
-      Toutes cantines déclarantes confondues, il tombe à 10,2&nbsp;%.</p>
-    <p>À Niort, les 8 cantines d'écoles et de crèches ont déclaré&nbsp;: 23&nbsp;% de bio en 2024.
-      À La Rochelle, 37 cantines sur 41 ont déclaré&nbsp;: 28&nbsp;% de bio.
-      Ces deux chiffres sont aussi ceux publiés par l'Agence Bio <sup class="cite"><a href="#src-10">10</a></sup>.</p>
+      <h3>Où en est-on en France&nbsp;?</h3>
+      <p>Trois sources mesurent des choses différentes. Chaque chiffre porte sur une base précise.</p>
 
-    <div class="note">
-      <p><strong>Mode de calcul.</strong> Moyenne des cantines déclarantes, pondérée par leur nombre de
-        repas. Les cantines qui n'ont pas déclaré ne sont pas comptées.</p>
-    </div>
-    <p>Les résultats de chaque cantine de Charente-Maritime et des Deux-Sèvres sont sur les
-      <a href="https://biguhuh.github.io/map_cantines_egalim/">cartes des cantines EGALIM</a>&nbsp;:
-      une carte par intercommunalité, et une carte interactive cantine par cantine.</p>
-  </section>
+      <table>
+        <thead>
+          <tr><th scope="col">Source</th><th scope="col">Base du chiffre</th><th scope="col">Part de bio</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Ministère de l'Agriculture <sup class="cite"><a href="#src-5">5</a></sup></th>
+            <td>Achats 2024 des restaurants qui les ont déclarés, soit 40&nbsp;% des sites</td><td>11,8&nbsp;%</td></tr>
+          <tr><th scope="row">Agence Bio <sup class="cite"><a href="#src-10">10</a></sup></th>
+            <td>Estimation de l'ensemble des achats 2024 des cantines, à partir des ventes des grossistes</td><td>moins de 6&nbsp;%</td></tr>
+          <tr><th scope="row">Association des maires de France <sup class="cite"><a href="#src-14">14</a></sup></th>
+            <td>2&nbsp;282 communes volontaires, cantines des écoles, année 2023, enquête publiée en juin 2024</td><td>37&nbsp;% des communes atteignent 20&nbsp;% <sup class="cite"><a href="#src-10">10</a></sup></td></tr>
+        </tbody>
+      </table>
 
-  <section id="objections" aria-labelledby="h-objections">
-    <h2 id="h-objections">Les objections courantes</h2>
+      <p>Pour les produits durables et de qualité, bio compris, le ministère trouve 29,5&nbsp;%, pour un
+        objectif de 50&nbsp;% <sup class="cite"><a href="#src-5">5</a></sup>.
+        Selon l'enquête des maires, 18&nbsp;% des communes atteignaient les deux objectifs à la fois
+        <sup class="cite"><a href="#src-14">14</a></sup>.
+        L'Agence Bio évalue les achats bio des cantines à 516 millions d'euros en 2024, contre 1,5 milliard
+        si l'objectif de 20&nbsp;% était atteint <sup class="cite"><a href="#src-10">10</a></sup>.
+        Dans les achats alimentaires des ménages, le bio pèse 5,6&nbsp;% en 2024
+        <sup class="cite"><a href="#src-28">28</a></sup>.</p>
 
-    <p>Cinq objections reviennent souvent quand on parle de bio et de pesticides. Voici ce qu'en disent
-      les données.</p>
+      <div class="note">
+        <p><strong>Pourquoi des chiffres si différents&nbsp;?</strong> Le ministère et l'enquête des maires
+          ne comptent que les cantines ou communes qui répondent. Elles sont souvent les plus avancées.
+          L'Agence Bio estime l'ensemble du marché à partir des grossistes. Toutes ces sources concluent
+          que l'objectif de 20&nbsp;% n'est pas atteint en moyenne.</p>
+      </div>
 
-    <h3>«&nbsp;Le bio, on ne peut pas savoir si c'est vraiment bio&nbsp;»</h3>
-    <p>Chaque producteur, transformateur et distributeur bio est vérifié au moins une fois par an par
-      un organisme indépendant <sup class="cite"><a href="#src-20">20</a></sup>.
-      La vérification comprend en principe une visite sur place. Pour un opérateur sans manquement
-      depuis trois ans et jugé à faible risque, deux visites peuvent être espacées de 24 mois au plus.</p>
-    <p>Des fraudes existent pourtant. La Cour des comptes européenne juge que le système de contrôle
-      s'est amélioré, mais que la surveillance des importations et la traçabilité restent à renforcer
-      <sup class="cite"><a href="#src-21">21</a></sup>.
-      L'EFSA cite aussi des produits conventionnels étiquetés bio à tort parmi les causes de résidus
-      <sup class="cite"><a href="#src-19">19</a></sup>.</p>
+      <h3>En Deux-Sèvres et en Charente-Maritime</h3>
+      <p>Les déclarations officielles des cantines sont publiées sur data.gouv.fr
+        <sup class="cite"><a href="#src-15">15</a></sup>.
+        Pour les achats de 2024, un tiers des cantines des deux départements les ont déclarés.
+        Dans les écoles et crèches déclarantes des Deux-Sèvres, le bio atteint en moyenne 24,6&nbsp;%.
+        Toutes cantines déclarantes confondues, il tombe à 10,2&nbsp;%.</p>
+      <p>À Niort, les 8 cantines d'écoles et de crèches ont déclaré&nbsp;: 23&nbsp;% de bio en 2024.
+        À La Rochelle, 37 cantines sur 41 ont déclaré&nbsp;: 28&nbsp;% de bio.
+        Ces deux chiffres sont aussi ceux publiés par l'Agence Bio <sup class="cite"><a href="#src-10">10</a></sup>.</p>
 
-    <h3>«&nbsp;À quoi bon, si tout est pollué autour des champs&nbsp;?&nbsp;»</h3>
-    <p>Les champs bio reçoivent une partie des pesticides de leurs voisins, par l'air et par l'eau.
-      Les mesures dans l'air et dans l'eau sont présentées dans l'étude
-      <a href="https://biguhuh.github.io/cancer/#exposition">Cancers, pesticides et voies d'exposition</a>.
-      Malgré cela, les aliments bio contiennent beaucoup moins souvent des résidus&nbsp;: 80&nbsp;% des
-      échantillons bio n'en ont aucun de quantifiable
-      (<a href="#residus">les résidus dans l'assiette</a>).
-      L'EFSA cite la contamination de l'environnement parmi les causes des résidus trouvés en bio
-      <sup class="cite"><a href="#src-19">19</a></sup>.</p>
+      <div class="note">
+        <p><strong>Mode de calcul.</strong> Moyenne des cantines déclarantes, pondérée par leur nombre de
+          repas. Les cantines qui n'ont pas déclaré ne sont pas comptées.</p>
+      </div>
+      <p>Les résultats de chaque cantine de Charente-Maritime et des Deux-Sèvres sont sur les
+        <a href="https://biguhuh.github.io/map_cantines_egalim/">cartes des cantines EGALIM</a>&nbsp;:
+        une carte par intercommunalité, et une carte interactive cantine par cantine.</p>
+    </section>
 
-    <h3 id="objection-sante">«&nbsp;Rien ne prouve que le bio est meilleur pour la santé&nbsp;»</h3>
-    <p>Il faut distinguer deux choses. Manger bio réduit l'exposition aux pesticides&nbsp;: c'est mesuré
-      dans les urines (<a href="#exposition">bio et exposition</a>).
-      Un effet sur la santé des consommateurs, lui, n'est pas démontré.</p>
-    <p>Deux grandes cohortes donnent des résultats différents.
-      En France, l'étude NutriNet-Santé a suivi 68&nbsp;946 adultes. Le quart qui mangeait le plus bio
-      avait 25&nbsp;% de cancers en moins que le quart qui en mangeait le moins
-      <sup class="cite"><a href="#src-23">23</a></sup>.
-      Au Royaume-Uni, l'étude Million Women a suivi 623&nbsp;080 femmes. Elle ne trouve pas moins de cancers
-      au total chez celles qui mangent bio. Seul le lymphome non hodgkinien est moins fréquent
-      <sup class="cite"><a href="#src-24">24</a></sup>.
-      Une revue systématique de 2019 conclut que les données ne permettent pas d'affirmer un bénéfice
-      sur la santé <sup class="cite"><a href="#src-25">25</a></sup>.</p>
-    <p>Le lien entre pesticides et maladies est mieux établi chez les personnes les plus exposées,
-      comme les agriculteurs <sup class="cite"><a href="#src-22">22</a></sup>. Il est présenté dans
-      l'<a href="https://biguhuh.github.io/cancer/">étude cancers</a>.</p>
+    <section id="prix" aria-labelledby="h-prix">
+      <h2 id="h-prix">Le prix du bio</h2>
 
-    <div class="note">
-      <p><strong>Limites.</strong> Ce sont des études d'observation. Ceux qui mangent bio ont souvent
-        une alimentation et un mode de vie différents. Les auteurs corrigent une partie de ces écarts,
-        pas tous. Aucun essai n'a tiré au sort des personnes pour manger bio pendant des années.</p>
-    </div>
+      <h3>Pourquoi le bio coûte plus cher</h3>
+      <p>Le bio coûte plus cher à produire. Ses rendements sont en moyenne 19&nbsp;% plus bas
+        <sup class="cite"><a href="#src-29">29</a></sup>.
+        Il demande aussi plus de travail&nbsp;: les fermes bio représentent 16&nbsp;% des emplois agricoles
+        pour environ 10&nbsp;% de la surface <sup class="cite"><a href="#src-30">30</a></sup>.</p>
 
-    <h3>«&nbsp;Ce n'est pas mieux pour l'environnement&nbsp;»</h3>
-    <p>Une méta-analyse de 94 études trouve en moyenne 30&nbsp;% d'espèces en plus sur les parcelles bio.
-      Le résultat est stable sur trente ans de publications. L'effet est plus fort dans les paysages de
-      grandes cultures <sup class="cite"><a href="#src-26">26</a></sup>.</p>
-    <p>Pour l'eau, un rapport de l'Assemblée nationale rappelle que prévenir la pollution des captages
-      coûte moins cher que traiter l'eau ensuite <sup class="cite"><a href="#src-27">27</a></sup>.</p>
+      <h3>Un coût du conventionnel payé ailleurs</h3>
+      <p>Une partie du coût du conventionnel ne se voit pas dans le prix des aliments. Elle est payée par
+        la facture d'eau. Dépolluer une eau chargée en nitrates et pesticides coûte en moyenne trois fois
+        plus cher que prévenir la pollution <sup class="cite"><a href="#src-33">33</a></sup>.
+        Retirer les pesticides et les nitrates de l'eau potable coûterait entre 750 millions et
+        1,3 milliard d'euros par an en France, selon une estimation du début des années 2010
+        <sup class="cite"><a href="#src-27">27</a></sup>
+        (<a href="#eau">l'eau, onglet Environnement</a>).</p>
+      <p>Cet argument pèse davantage pour la restauration collective publique. Les communes et
+        intercommunalités qui financent les cantines sont aussi celles qui organisent le service de l'eau
+        potable, dont les habitants paient le traitement sur leur facture.</p>
+    </section>
+  </div>
 
-    <h3>«&nbsp;Le bio, c'est trop cher&nbsp;»</h3>
-    <p>Le bio coûte plus cher à produire. Ses rendements sont en moyenne 19&nbsp;% plus bas
-      <sup class="cite"><a href="#src-29">29</a></sup>.
-      Il demande aussi plus de travail&nbsp;: les fermes bio représentent 16&nbsp;% des emplois agricoles
-      pour environ 10&nbsp;% de la surface <sup class="cite"><a href="#src-30">30</a></sup>.
-      En 2024, le bio représente 5,6&nbsp;% des achats alimentaires des ménages
-      <sup class="cite"><a href="#src-28">28</a></sup>.</p>
-    <p>Une partie du coût du conventionnel est payée ailleurs, par la facture d'eau. Retirer les
-      pesticides et les nitrates de l'eau potable coûterait entre 750 millions et 1,3 milliard d'euros
-      par an <sup class="cite"><a href="#src-27">27</a></sup>.
-      Cette estimation date du début des années 2010 et n'a pas été réactualisée, alors que le nombre de
-      substances recherchées a augmenté. Pour le coût du bio à la cantine, voir
-      <a href="#cantines">le bio à la cantine</a>.</p>
-  </section>
+  <!-- ===================== Labels ===================== -->
+  <div class="tab-panel" id="panel-labels" data-tab="labels" role="tabpanel" aria-labelledby="tab-labels">
+    <section aria-labelledby="h-labels">
+      <h2 id="h-labels">Labels alimentaires&nbsp;: ce qu'ils garantissent sur les pesticides</h2>
 
-  <section id="sources" aria-labelledby="h-sources">
-    <h2 id="h-sources">Sources</h2>
-    <ol class="sources">
-      <li id="src-1"><span class="type">Étude</span> Bradman A., Quirós-Alcalá L., Castorina R. et al., 2015.
-        Effect of organic diet intervention on pesticide exposures in young children living in low-income
-        urban and agricultural communities. <em>Environmental Health Perspectives</em> 123:1086-1093.
-        <a href="https://doi.org/10.1289/ehp.1408660">doi:10.1289/ehp.1408660</a>,
-        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4590750">PMC4590750</a></li>
-      <li id="src-2"><span class="type">Étude</span> Glorennec P., Serrano T., Fravallo M. et al., 2017.
-        Determinants of children's exposure to pyrethroid insecticides in western France.
-        <em>Environment International</em> 104:76-82. Cohorte PELAGIE, Inserm-Irset.
-        <a href="https://doi.org/10.1016/j.envint.2017.04.007">doi:10.1016/j.envint.2017.04.007</a>,
-        <a href="https://hal-univ-rennes1.archives-ouvertes.fr/hal-01560147">HAL</a></li>
-      <li id="src-3"><span class="type">Texte officiel</span> Loi n°&nbsp;2018-938 du 30 octobre 2018, dite EGalim.
-        <a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000037547946">Légifrance</a></li>
-      <li id="src-4"><span class="type">Texte officiel</span> Loi n°&nbsp;2021-1104 du 22 août 2021, dite Climat et résilience.
-        <a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043956924">Légifrance</a></li>
-      <li id="src-5"><span class="type">Institution</span> Ministère de l'Agriculture, communiqué de presse du 26 novembre 2025,
-        « Restauration collective&nbsp;: Annie Genevard réaffirme la priorité donnée pour des approvisionnements durables et de qualité ».
-        <a href="https://agriculture.gouv.fr/telecharger/152125">agriculture.gouv.fr</a></li>
-      <li id="src-6"><span class="type">Institution</span> ADEME, fiche « Aliments et boissons issus de l'agriculture biologique ».
-        <a href="https://agirpourlatransition.ademe.fr/particuliers/mieux-consommer/mieux-choisir/labels-environnementaux/alimentation/aliments-boissons-agriculture-biologique">agirpourlatransition.ademe.fr</a></li>
-      <li id="src-7"><span class="type">Institution</span> Agence Bio, « Les traitements naturels utilisés en agriculture biologique sont-ils toxiques&nbsp;? ».
-        <a href="https://www.agencebio.org/questions/les-traitements-naturels-utilises-en-agriculture-biologique-sont-ils-toxiques/">agencebio.org</a></li>
-      <li id="src-8"><span class="type">Association</span> UFC-Que Choisir, « Label Haute Valeur Environnementale — Greenwashing de l'agriculture intensive&nbsp;? ».
-        <a href="https://www.quechoisir.org/actualite-label-haute-valeur-environnementale-greenwashing-de-l-agriculture-intensive-n87083/">quechoisir.org</a></li>
-      <li id="src-9"><span class="type">Association</span> Générations Futures, « Qu'est-ce que le Zéro Résidu de Pesticides&nbsp;? ».
-        <a href="https://www.generations-futures.fr/faq/quest-ce-que-le-zero-residus-de-pesticides/">generations-futures.fr</a></li>
-      <li id="src-10"><span class="type">Institution</span> Agence Bio, « Bio et restauration collective et commerciale en France&nbsp;:
-        des niveaux d'introduction très variables », novembre 2025. Reprend l'enquête AMF de juin 2024.
-        L'Agence Bio est un groupement d'intérêt public chargé de la promotion du bio.
-        <a href="https://www.agencebio.org/wp-content/uploads/2025/11/CARNET-RHD-France-LAGENCE-BIO_Nov.25.pdf">agencebio.org (PDF)</a></li>
-      <li id="src-11"><span class="type">Vulgarisation</span> <em>Sciences Ouest</em> n°&nbsp;353, 23 juin 2017,
-        « Les enfants exposés aux insecticides ». Présente l'étude PELAGIE (source 2) avec son auteur&nbsp;; donne le sens de
-        chaque association avec le bio.
-        <a href="https://espace-sciences.org/sciences-ouest/353/actualite/les-enfants-exposes-aux-insecticides">espace-sciences.org</a></li>
-      <li id="src-12"><span class="type">Texte officiel</span> Règlement d'exécution (UE) 2021/1165, annexe I&nbsp;:
-        substances autorisées pour la protection des cultures en production biologique. Liste modifiée plusieurs fois&nbsp;:
-        consulter la version consolidée.
-        <a href="https://eur-lex.europa.eu/eli/reg_impl/2021/1165/oj?locale=fr">EUR-Lex</a></li>
-      <li id="src-13"><span class="type">Décision de justice</span> Conseil d'État, 3e et 8e chambres réunies, 18 février 2025,
-        n°&nbsp;470667, FNAB et autres. Rejette le recours contre le référentiel HVE de 2022.
-        <a href="https://www.legifrance.gouv.fr/juri/id/CETATEXT000051205349">Légifrance</a></li>
-      <li id="src-14"><span class="type">Association d'élus</span> Association des maires de France et AgroParisTech,
-        enquête sur la restauration scolaire, juin 2024. Compte rendu dans <em>Maire info</em>, quotidien de l'AMF, 20 juin 2024.
-        <a href="https://www.maire-info.com/restauration-scolaire/egalim-et-cantines-une-commune-sur-cinq-respecte-dej%C3%A0-les-quotas-la-moitie-reste-dans-le-flou-article-24811">maire-info.com</a></li>
-      <li id="src-15"><span class="type">Données officielles</span> Ministère de l'Agriculture, plateforme ma cantine,
-        « Résultats de campagnes de télédéclaration des cantines », données 2024 (campagne 2025). Calcul local&nbsp;:
-        <a href="https://biguhuh.github.io/map_cantines_egalim/">cartes des cantines EGALIM</a>.
-        <a href="https://www.data.gouv.fr/datasets/resultats-de-campagnes-de-teledeclaration-des-cantines">data.gouv.fr</a></li>
-      <li id="src-16"><span class="type">Institution</span> Haut Conseil de la santé publique, avis du 16 février 2017,
-        « Révision des repères alimentaires pour les adultes du futur Programme national nutrition santé 2017-2021 ».
-        <a href="https://www.hcsp.fr/explore.cgi/avisrapportsdomaine?clefr=600">hcsp.fr</a></li>
-      <li id="src-17"><span class="type">Institution</span> Santé publique France, Manger Bouger,
-        « Les recommandations sur l'alimentation, l'activité physique et la sédentarité », publié sur Santé.fr.
-        <a href="https://www.sante.fr/node/4566467">sante.fr</a></li>
-      <li id="src-18"><span class="type">Presse médicale</span> <em>Vidal</em>, « Le cinquième programme national nutrition
-        santé officiellement lancé », 9 avril 2026.
-        <a href="https://www.vidal.fr/actualites/37680-le-cinquieme-programme-national-nutrition-sante-officiellement-lance.html">vidal.fr</a></li>
-      <li id="src-19"><span class="type">Institution</span> EFSA, 2025. The 2023 European Union report on pesticide residues
-        in food. <em>EFSA Journal</em> 23:e9398. Section sur les produits bio.
-        <a href="https://doi.org/10.2903/j.efsa.2025.9398">doi:10.2903/j.efsa.2025.9398</a>,
-        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12076349/">PMC12076349</a></li>
-      <li id="src-20"><span class="type">Texte officiel</span> Règlement (UE) 2018/848 relatif à la production biologique,
-        article 38, paragraphe 3. Appliqué depuis le 1er janvier 2022.
-        <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32018R0848">EUR-Lex</a></li>
-      <li id="src-21"><span class="type">Institution</span> Cour des comptes européenne, rapport spécial n°&nbsp;4/2019,
-        « Même si le système de contrôle des produits biologiques s'est amélioré, certains défis restent à relever ».
-        <a href="https://www.eca.europa.eu/lists/ecadocuments/sr19_04/sr_organic-food_fr.pdf">eca.europa.eu (PDF)</a></li>
-      <li id="src-22"><span class="type">Institution</span> Inserm, 2021. Expertise collective
-        <em>Pesticides et effets sur la santé, nouvelles données</em>.
-        <a href="https://www.inserm.fr/expertise-collective/pesticides-et-sante-nouvelles-donnees-2021/">inserm.fr</a></li>
-      <li id="src-23"><span class="type">Étude</span> Baudry J., Assmann K.E., Touvier M. et al., 2018.
-        Association of frequency of organic food consumption with cancer risk. <em>JAMA Internal Medicine</em>
-        178:1597-1606. Cohorte NutriNet-Santé.
-        <a href="https://doi.org/10.1001/jamainternmed.2018.4357">doi:10.1001/jamainternmed.2018.4357</a></li>
-      <li id="src-24"><span class="type">Étude</span> Bradbury K.E., Balkwill A., Spencer E.A. et al., 2014.
-        Organic food consumption and the incidence of cancer in a large prospective study of women in the
-        United Kingdom. <em>British Journal of Cancer</em> 110:2321-2326. Million Women Study.
-        <a href="https://doi.org/10.1038/bjc.2014.148">doi:10.1038/bjc.2014.148</a>,
-        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4007233">PMC4007233</a></li>
-      <li id="src-25"><span class="type">Revue</span> Vigar V., Myers S., Oliver C. et al., 2019. A systematic review of
-        organic versus conventional food consumption: is there a measurable benefit on human health?
-        <em>Nutrients</em> 12:7.
-        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7019963/">PMC7019963</a></li>
-      <li id="src-26"><span class="type">Méta-analyse</span> Tuck S.L., Winqvist C., Mota F. et al., 2014. Land-use intensity
-        and the effects of organic farming on biodiversity: a hierarchical meta-analysis.
-        <em>Journal of Applied Ecology</em> 51:746-755.
-        <a href="https://doi.org/10.1111/1365-2664.12219">doi:10.1111/1365-2664.12219</a></li>
-      <li id="src-27"><span class="type">Institution</span> Assemblée nationale, rapport n°&nbsp;2427 de M. Jean-Claude Raux
-        sur la proposition de loi pour protéger l'eau potable, commission du développement durable, 4 février 2026.
-        <a href="https://www.assemblee-nationale.fr/dyn/17/rapports/cion-dvp/l17b2427_rapport-fond.pdf">assemblee-nationale.fr (PDF)</a></li>
-      <li id="src-28"><span class="type">Institution</span> Agence Bio, communiqué de présentation des chiffres du bio 2024,
-        juin 2025.
-        <a href="https://www.agencebio.org/wp-content/uploads/2025/06/CP_Presentation-des-chiffres-du-bio2024_Agence-BIO.pdf">agencebio.org (PDF)</a></li>
-      <li id="src-29"><span class="type">Méta-analyse</span> Ponisio L.C., M'Gonigle L.K., Mace K.C. et al., 2015.
-        Diversification practices reduce organic to conventional yield gap.
-        <em>Proceedings of the Royal Society B</em> 282:20141396.
-        <a href="https://doi.org/10.1098/rspb.2014.1396">doi:10.1098/rspb.2014.1396</a></li>
-      <li id="src-30"><span class="type">Presse agricole</span> <em>Pleinchamp</em>, « L'agriculture biologique en 2024&nbsp;»,
-        d'après les chiffres de l'Agence Bio.
-        <a href="https://www.pleinchamp.com/actualite/l-agriculture-biologique-en-2024-10-1-de-la-sau-2-61.863-fermes-1-12-3-md-0-8">pleinchamp.com</a></li>
-    </ol>
-  </section>
+      <p>Plusieurs labels parlent d'environnement ou de qualité. Ils ne disent pas tous la même chose sur
+        les pesticides.</p>
+
+      <table>
+        <thead>
+          <tr><th scope="col">Label</th><th scope="col">Pesticides de synthèse</th><th scope="col">Ce qui est contrôlé</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Bio (AB, Eurofeuille)</th><td>Interdits</td><td>La méthode de production, sur l'exploitation</td></tr>
+          <tr><th scope="row">HVE</th><td>Autorisés</td><td>Un score sur quatre thèmes</td></tr>
+          <tr><th scope="row">Zéro résidu de pesticides</th><td>Autorisés</td><td>Les résidus sur le produit récolté</td></tr>
+        </tbody>
+      </table>
+
+      <h3 id="label-bio">Bio, AB ou Eurofeuille</h3>
+      <p>Le règlement européen interdit les pesticides et engrais de synthèse, ainsi que les OGM
+        <sup class="cite"><a href="#src-6">6</a></sup>.
+        Le bio autorise une liste limitée de substances, fixée par un règlement européen et révisée
+        régulièrement <sup class="cite"><a href="#src-12">12</a></sup>.
+        Il s'agit de substances d'origine naturelle ou de biocontrôle, comme le cuivre ou le soufre
+        <sup class="cite"><a href="#src-7">7</a></sup>.
+        La plupart se dégradent plus vite que les pesticides de synthèse. Le cuivre et le soufre font
+        exception.
+        Le bio garantit donc l'absence de pesticides de synthèse, pas l'absence de tout traitement.</p>
+      <p>Des organismes certificateurs indépendants contrôlent l'exploitation elle-même. Chaque
+        producteur, transformateur et distributeur bio est vérifié au moins une fois par an
+        <sup class="cite"><a href="#src-20">20</a></sup>.
+        La vérification comprend en principe une visite sur place. Pour un opérateur sans manquement
+        depuis trois ans et jugé à faible risque, deux visites peuvent être espacées de 24 mois au plus.</p>
+      <p>Des fraudes existent. La Cour des comptes européenne juge que le système de contrôle s'est
+        amélioré, mais que la surveillance des importations et la traçabilité restent à renforcer
+        <sup class="cite"><a href="#src-21">21</a></sup>.</p>
+
+      <h3>HVE, Haute Valeur Environnementale</h3>
+      <p>Ce label d'État n'interdit pas les pesticides de synthèse <sup class="cite"><a href="#src-8">8</a></sup>.
+        Il note l'exploitation sur quatre thèmes&nbsp;: biodiversité, stratégie phytosanitaire, fertilisation
+        et irrigation.
+        Depuis 2023, sa nouvelle version interdit les pesticides dont la toxicité pour la reproduction,
+        le caractère cancérogène ou mutagène est avéré ou présumé <sup class="cite"><a href="#src-13">13</a></sup>.
+        Les autres pesticides de synthèse restent autorisés.
+        Des associations, dont la fédération des agriculteurs bio, ont attaqué ce label pour tromperie
+        du consommateur.
+        Le Conseil d'État a rejeté leur recours en février 2025 <sup class="cite"><a href="#src-13">13</a></sup>.</p>
+
+      <h3>Zéro résidu de pesticides</h3>
+      <p>C'est un label privé, créé en 2018 <sup class="cite"><a href="#src-9">9</a></sup>.
+        Les pesticides de synthèse restent autorisés pendant la culture.
+        Le label vise l'absence de résidu quantifiable sur le produit, au seuil de 0,01&nbsp;mg/kg.
+        Ce seuil est une limite de mesure&nbsp;: un résidu plus faible peut rester.
+        Les sols, l'eau et l'air restent exposés pendant la production.</p>
+
+      <div class="note">
+        <p><strong>En résumé.</strong> Des trois, seul le bio interdit les pesticides de synthèse par
+          construction. HVE en interdit une partie, Zéro résidu mesure un résultat sur le produit.</p>
+        <p><strong>Nature des sources.</strong> Les fiches sur HVE et Zéro résidu viennent d'une association
+          de consommateurs et d'une association environnementale, qui ont porté le recours contre HVE.
+          Elles décrivent les cahiers des charges avec un regard critique. La décision du Conseil d'État
+          donne la position du juge.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================== Sources ===================== -->
+  <div class="tab-panel" id="panel-sources" data-tab="sources" role="tabpanel" aria-labelledby="tab-sources">
+    <section aria-labelledby="h-sources">
+      <h2 id="h-sources">Sources</h2>
+      <ol class="sources">
+        <li id="src-1"><span class="type">Étude</span> Bradman A., Quirós-Alcalá L., Castorina R. et al., 2015.
+          Effect of organic diet intervention on pesticide exposures in young children living in low-income
+          urban and agricultural communities. <em>Environmental Health Perspectives</em> 123:1086-1093.
+          <a href="https://doi.org/10.1289/ehp.1408660">doi:10.1289/ehp.1408660</a>,
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4590750">PMC4590750</a></li>
+        <li id="src-2"><span class="type">Étude</span> Glorennec P., Serrano T., Fravallo M. et al., 2017.
+          Determinants of children's exposure to pyrethroid insecticides in western France.
+          <em>Environment International</em> 104:76-82. Cohorte PELAGIE, Inserm-Irset.
+          <a href="https://doi.org/10.1016/j.envint.2017.04.007">doi:10.1016/j.envint.2017.04.007</a>,
+          <a href="https://hal-univ-rennes1.archives-ouvertes.fr/hal-01560147">HAL</a></li>
+        <li id="src-3"><span class="type">Texte officiel</span> Loi n°&nbsp;2018-938 du 30 octobre 2018, dite EGalim.
+          <a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000037547946">Légifrance</a></li>
+        <li id="src-4"><span class="type">Texte officiel</span> Loi n°&nbsp;2021-1104 du 22 août 2021, dite Climat et résilience.
+          <a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043956924">Légifrance</a></li>
+        <li id="src-5"><span class="type">Institution</span> Ministère de l'Agriculture, communiqué de presse du 26 novembre 2025,
+          « Restauration collective&nbsp;: Annie Genevard réaffirme la priorité donnée pour des approvisionnements durables et de qualité ».
+          <a href="https://agriculture.gouv.fr/telecharger/152125">agriculture.gouv.fr</a></li>
+        <li id="src-6"><span class="type">Institution</span> ADEME, fiche « Aliments et boissons issus de l'agriculture biologique ».
+          <a href="https://agirpourlatransition.ademe.fr/particuliers/mieux-consommer/mieux-choisir/labels-environnementaux/alimentation/aliments-boissons-agriculture-biologique">agirpourlatransition.ademe.fr</a></li>
+        <li id="src-7"><span class="type">Institution</span> Agence Bio, « Les traitements naturels utilisés en agriculture biologique sont-ils toxiques&nbsp;? ».
+          <a href="https://www.agencebio.org/questions/les-traitements-naturels-utilises-en-agriculture-biologique-sont-ils-toxiques/">agencebio.org</a></li>
+        <li id="src-8"><span class="type">Association</span> UFC-Que Choisir, « Label Haute Valeur Environnementale — Greenwashing de l'agriculture intensive&nbsp;? ».
+          <a href="https://www.quechoisir.org/actualite-label-haute-valeur-environnementale-greenwashing-de-l-agriculture-intensive-n87083/">quechoisir.org</a></li>
+        <li id="src-9"><span class="type">Association</span> Générations Futures, « Qu'est-ce que le Zéro Résidu de Pesticides&nbsp;? ».
+          <a href="https://www.generations-futures.fr/faq/quest-ce-que-le-zero-residus-de-pesticides/">generations-futures.fr</a></li>
+        <li id="src-10"><span class="type">Institution</span> Agence Bio, « Bio et restauration collective et commerciale en France&nbsp;:
+          des niveaux d'introduction très variables », novembre 2025. Reprend l'enquête AMF de juin 2024.
+          L'Agence Bio est un groupement d'intérêt public chargé de la promotion du bio.
+          <a href="https://www.agencebio.org/wp-content/uploads/2025/11/CARNET-RHD-France-LAGENCE-BIO_Nov.25.pdf">agencebio.org (PDF)</a></li>
+        <li id="src-11"><span class="type">Vulgarisation</span> <em>Sciences Ouest</em> n°&nbsp;353, 23 juin 2017,
+          « Les enfants exposés aux insecticides ». Présente l'étude PELAGIE (source 2) avec son auteur&nbsp;; donne le sens de
+          chaque association avec le bio.
+          <a href="https://espace-sciences.org/sciences-ouest/353/actualite/les-enfants-exposes-aux-insecticides">espace-sciences.org</a></li>
+        <li id="src-12"><span class="type">Texte officiel</span> Règlement d'exécution (UE) 2021/1165, annexe I&nbsp;:
+          substances autorisées pour la protection des cultures en production biologique. Liste modifiée plusieurs fois&nbsp;:
+          consulter la version consolidée.
+          <a href="https://eur-lex.europa.eu/eli/reg_impl/2021/1165/oj?locale=fr">EUR-Lex</a></li>
+        <li id="src-13"><span class="type">Décision de justice</span> Conseil d'État, 3e et 8e chambres réunies, 18 février 2025,
+          n°&nbsp;470667, FNAB et autres. Rejette le recours contre le référentiel HVE de 2022.
+          <a href="https://www.legifrance.gouv.fr/juri/id/CETATEXT000051205349">Légifrance</a></li>
+        <li id="src-14"><span class="type">Association d'élus</span> Association des maires de France et AgroParisTech,
+          enquête sur la restauration scolaire, juin 2024. Compte rendu dans <em>Maire info</em>, quotidien de l'AMF, 20 juin 2024.
+          <a href="https://www.maire-info.com/restauration-scolaire/egalim-et-cantines-une-commune-sur-cinq-respecte-dej%C3%A0-les-quotas-la-moitie-reste-dans-le-flou-article-24811">maire-info.com</a></li>
+        <li id="src-15"><span class="type">Données officielles</span> Ministère de l'Agriculture, plateforme ma cantine,
+          « Résultats de campagnes de télédéclaration des cantines », données 2024 (campagne 2025). Calcul local&nbsp;:
+          <a href="https://biguhuh.github.io/map_cantines_egalim/">cartes des cantines EGALIM</a>.
+          <a href="https://www.data.gouv.fr/datasets/resultats-de-campagnes-de-teledeclaration-des-cantines">data.gouv.fr</a></li>
+        <li id="src-16"><span class="type">Institution</span> Haut Conseil de la santé publique, avis du 16 février 2017,
+          « Révision des repères alimentaires pour les adultes du futur Programme national nutrition santé 2017-2021 ».
+          <a href="https://www.hcsp.fr/explore.cgi/avisrapportsdomaine?clefr=600">hcsp.fr</a></li>
+        <li id="src-17"><span class="type">Institution</span> Santé publique France, Manger Bouger,
+          « Les recommandations sur l'alimentation, l'activité physique et la sédentarité », publié sur Santé.fr.
+          <a href="https://www.sante.fr/node/4566467">sante.fr</a></li>
+        <li id="src-18"><span class="type">Presse médicale</span> <em>Vidal</em>, « Le cinquième programme national nutrition
+          santé officiellement lancé », 9 avril 2026.
+          <a href="https://www.vidal.fr/actualites/37680-le-cinquieme-programme-national-nutrition-sante-officiellement-lance.html">vidal.fr</a></li>
+        <li id="src-19"><span class="type">Institution</span> EFSA, 2025. The 2023 European Union report on pesticide residues
+          in food. <em>EFSA Journal</em> 23:e9398. Section sur les produits bio.
+          <a href="https://doi.org/10.2903/j.efsa.2025.9398">doi:10.2903/j.efsa.2025.9398</a>,
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12076349/">PMC12076349</a></li>
+        <li id="src-20"><span class="type">Texte officiel</span> Règlement (UE) 2018/848 relatif à la production biologique,
+          article 38, paragraphe 3. Appliqué depuis le 1er janvier 2022.
+          <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32018R0848">EUR-Lex</a></li>
+        <li id="src-21"><span class="type">Institution</span> Cour des comptes européenne, rapport spécial n°&nbsp;4/2019,
+          « Même si le système de contrôle des produits biologiques s'est amélioré, certains défis restent à relever ».
+          <a href="https://www.eca.europa.eu/lists/ecadocuments/sr19_04/sr_organic-food_fr.pdf">eca.europa.eu (PDF)</a></li>
+        <li id="src-22"><span class="type">Institution</span> Inserm, 2021. Expertise collective
+          <em>Pesticides et effets sur la santé, nouvelles données</em>.
+          <a href="https://www.inserm.fr/expertise-collective/pesticides-et-sante-nouvelles-donnees-2021/">inserm.fr</a></li>
+        <li id="src-23"><span class="type">Étude</span> Baudry J., Assmann K.E., Touvier M. et al., 2018.
+          Association of frequency of organic food consumption with cancer risk. <em>JAMA Internal Medicine</em>
+          178:1597-1606. Cohorte NutriNet-Santé.
+          <a href="https://doi.org/10.1001/jamainternmed.2018.4357">doi:10.1001/jamainternmed.2018.4357</a></li>
+        <li id="src-24"><span class="type">Étude</span> Bradbury K.E., Balkwill A., Spencer E.A. et al., 2014.
+          Organic food consumption and the incidence of cancer in a large prospective study of women in the
+          United Kingdom. <em>British Journal of Cancer</em> 110:2321-2326. Million Women Study.
+          <a href="https://doi.org/10.1038/bjc.2014.148">doi:10.1038/bjc.2014.148</a>,
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4007233">PMC4007233</a></li>
+        <li id="src-25"><span class="type">Revue</span> Vigar V., Myers S., Oliver C. et al., 2019. A systematic review of
+          organic versus conventional food consumption: is there a measurable benefit on human health?
+          <em>Nutrients</em> 12:7.
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7019963/">PMC7019963</a></li>
+        <li id="src-26"><span class="type">Méta-analyse</span> Tuck S.L., Winqvist C., Mota F. et al., 2014. Land-use intensity
+          and the effects of organic farming on biodiversity: a hierarchical meta-analysis.
+          <em>Journal of Applied Ecology</em> 51:746-755.
+          <a href="https://doi.org/10.1111/1365-2664.12219">doi:10.1111/1365-2664.12219</a></li>
+        <li id="src-27"><span class="type">Institution</span> Assemblée nationale, rapport n°&nbsp;2427 de M. Jean-Claude Raux
+          sur la proposition de loi pour protéger l'eau potable, commission du développement durable, 4 février 2026.
+          <a href="https://www.assemblee-nationale.fr/dyn/17/rapports/cion-dvp/l17b2427_rapport-fond.pdf">assemblee-nationale.fr (PDF)</a></li>
+        <li id="src-28"><span class="type">Institution</span> Agence Bio, communiqué de présentation des chiffres du bio 2024,
+          juin 2025.
+          <a href="https://www.agencebio.org/wp-content/uploads/2025/06/CP_Presentation-des-chiffres-du-bio2024_Agence-BIO.pdf">agencebio.org (PDF)</a></li>
+        <li id="src-29"><span class="type">Méta-analyse</span> Ponisio L.C., M'Gonigle L.K., Mace K.C. et al., 2015.
+          Diversification practices reduce organic to conventional yield gap.
+          <em>Proceedings of the Royal Society B</em> 282:20141396.
+          <a href="https://doi.org/10.1098/rspb.2014.1396">doi:10.1098/rspb.2014.1396</a></li>
+        <li id="src-30"><span class="type">Presse agricole</span> <em>Pleinchamp</em>, « L'agriculture biologique en 2024&nbsp;»,
+          d'après les chiffres de l'Agence Bio.
+          <a href="https://www.pleinchamp.com/actualite/l-agriculture-biologique-en-2024-10-1-de-la-sau-2-61.863-fermes-1-12-3-md-0-8">pleinchamp.com</a></li>
+        <li id="src-31"><span class="type">Étude</span> Rigal S., Dakos V. et al., 2023. Farmland practices are driving bird
+          population decline across Europe. <em>Proceedings of the National Academy of Sciences</em> 120:e2216573120.
+          170 espèces, plus de 20&nbsp;000 sites, 28 pays, 1980-2016.
+          <a href="https://doi.org/10.1073/pnas.2216573120">doi:10.1073/pnas.2216573120</a></li>
+        <li id="src-32"><span class="type">Étude</span> Catarino R., Bretagnolle V., Perrot T., Vialloux F., Gaba S., 2019.
+          Bee pollination outperforms pesticides for oilseed crop production and profitability.
+          <em>Proceedings of the Royal Society B</em> 286:20191550. Zone atelier Plaine &amp; Val de Sèvre, CNRS Chizé.
+          <a href="https://doi.org/10.1098/rspb.2019.1550">doi:10.1098/rspb.2019.1550</a>,
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6790783">PMC6790783</a></li>
+        <li id="src-33"><span class="type">Presse</span> Banque des Territoires, <em>Localtis</em>, « Pollution de l'eau&nbsp;:
+          le curatif trois fois plus coûteux que le préventif, selon une nouvelle étude&nbsp;», 7 septembre 2026.
+          Présente une étude de l'Agence de l'eau Seine-Normandie sur 21 captages.
+          <a href="https://www.banquedesterritoires.fr/pollution-de-leau-le-curatif-trois-fois-plus-couteux-que-le-preventif-selon-une-nouvelle-etude">banquedesterritoires.fr</a></li>
+        <li id="src-34"><span class="type">Données officielles</span> Eurostat, « Sales of pesticides in the EU down another
+          9% in 2023&nbsp;», 13 mai 2025.
+          <a href="https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20250513-1">ec.europa.eu</a></li>
+      </ol>
+    </section>
+  </div>
 
   <footer>
     Santé des Territoires Aigondigné. Textes sous licence CC BY 4.0, code sous licence MIT.
     <a href="https://github.com/Biguhuh/bio-pesticides">Dépôt du projet</a>.
   </footer>
 </main>
+<script>
+(function () {
+  "use strict";
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabs [role="tab"]'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll(".tab-panel"));
+  if (!tabs.length || !panels.length) return;
+
+  function isTabName(name) {
+    return tabs.some(function (t) { return t.dataset.tab === name; });
+  }
+
+  function activateTab(name, opts) {
+    opts = opts || {};
+    if (!isTabName(name)) return false;
+    tabs.forEach(function (tab) {
+      var on = tab.dataset.tab === name;
+      tab.setAttribute("aria-selected", on ? "true" : "false");
+      tab.tabIndex = on ? 0 : -1;
+    });
+    panels.forEach(function (panel) {
+      var on = panel.dataset.tab === name;
+      panel.hidden = !on;
+      panel.tabIndex = on ? 0 : -1;
+    });
+    if (opts.updateHash) history.replaceState(null, "", "#" + name);
+    return true;
+  }
+
+  // Une ancre (source [n], sous-partie) peut être dans un onglet caché :
+  // on affiche d'abord cet onglet, puis on fait défiler.
+  function jumpToAnchor(id, opts) {
+    opts = opts || {};
+    var target = document.getElementById(id);
+    if (!target) return false;
+    var panel = target.closest(".tab-panel");
+    if (panel) activateTab(panel.dataset.tab, {});
+    requestAnimationFrame(function () {
+      target.scrollIntoView({ behavior: opts.smooth === false ? "auto" : "smooth", block: "start" });
+    });
+    history.replaceState(null, "", "#" + id);
+    return true;
+  }
+
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener("click", function () {
+      activateTab(tab.dataset.tab, { updateHash: true });
+    });
+    tab.addEventListener("keydown", function (e) {
+      var idx = null;
+      if (e.key === "ArrowRight" || e.key === "Right") idx = (i + 1) % tabs.length;
+      else if (e.key === "ArrowLeft" || e.key === "Left") idx = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === "Home") idx = 0;
+      else if (e.key === "End") idx = tabs.length - 1;
+      else return;
+      e.preventDefault();
+      tabs[idx].focus();
+      activateTab(tabs[idx].dataset.tab, { updateHash: true });
+    });
+  });
+
+  document.addEventListener("click", function (e) {
+    var link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    var id = link.getAttribute("href").slice(1);
+    if (!id) return;
+    e.preventDefault();
+    if (isTabName(id)) activateTab(id, { updateHash: true });
+    else jumpToAnchor(id);
+  });
+
+  window.addEventListener("hashchange", function () {
+    var id = location.hash.replace("#", "");
+    if (!id) return;
+    if (isTabName(id)) activateTab(id, {});
+    else jumpToAnchor(id, { smooth: true });
+  });
+
+  var initial = location.hash.replace("#", "");
+  if (initial && isTabName(initial)) activateTab(initial, {});
+  else if (initial && document.getElementById(initial)) jumpToAnchor(initial, { smooth: false });
+  else activateTab(tabs[0].dataset.tab, {});
+})();
+</script>
 </body>
 </html>
