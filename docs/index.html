@@ -88,6 +88,10 @@
   .type { display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
           color: var(--muted); border: 1px solid var(--border); border-radius: 4px; padding: 0 5px; margin-right: 4px; }
   ol.sources li:target { background: var(--note-bg); border-radius: 6px; }
+  ol.sources .backlink { display: block; margin-top: 4px; font-size: 12.5px; }
+  ol.sources .backlink a { text-decoration: none; margin-right: 6px; }
+  ol.sources .backlink a:hover { text-decoration: underline; }
+  .pub-date { font-size: 13px; color: var(--muted); margin: -8px 0 20px; }
   footer { margin-top: 56px; font-size: 13px; color: var(--muted); }
   footer a { color: var(--muted); }
   @media (max-width: 480px) {
@@ -105,6 +109,7 @@
   <p class="lead">Ce que disent les données sur le bio et les pesticides&nbsp;: les recommandations de santé,
     l'environnement, l'exposition et les résidus, les cantines et les labels. Chaque affirmation renvoie à
     sa source, et un onglet explique comment la recherche établit la preuve.</p>
+  <p class="pub-date">Mis à jour en novembre 2026</p>
 
   <nav class="tabs" aria-label="Sections de la page">
     <div class="tabs-inner" role="tablist">
@@ -847,6 +852,31 @@
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabs [role="tab"]'));
   var panels = Array.prototype.slice.call(document.querySelectorAll(".tab-panel"));
   if (!tabs.length || !panels.length) return;
+
+  // Liens de retour depuis chaque source vers ses citations dans le texte, comme sur l'étude
+  // cancers : chaque appel [n] reçoit un identifiant, et la source liste ses occurrences.
+  var counts = {};
+  Array.prototype.forEach.call(document.querySelectorAll('sup.cite a[href^="#src-"]'), function (a) {
+    var n = a.getAttribute("href").slice(5);
+    counts[n] = (counts[n] || 0) + 1;
+    a.id = "cite-" + n + "-" + counts[n];
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("ol.sources li[id^='src-']"), function (li) {
+    var n = li.id.slice(4), k = counts[n] || 0;
+    if (!k) return;
+    var p = document.createElement("span");
+    p.className = "backlink";
+    if (k === 1) {
+      p.innerHTML = '<a href="#cite-' + n + '-1">↩ Voir dans le texte</a>';
+    } else {
+      var links = [];
+      for (var i = 1; i <= k; i++) {
+        links.push('<a href="#cite-' + n + '-' + i + '" title="Occurrence ' + i + ' dans le texte">↩' + i + '</a>');
+      }
+      p.innerHTML = "Voir dans le texte&nbsp;: " + links.join(" ");
+    }
+    li.appendChild(p);
+  });
 
   function isTabName(name) {
     return tabs.some(function (t) { return t.dataset.tab === name; });
